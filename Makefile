@@ -5,6 +5,7 @@ FLAGS = -Wall -Werror -Wextra
 FLAGS += -Ilibft/includes -Iincludes/
 
 SRCS = src/main.c \
+	   src/loop.c
 
 LIBFT_PATH = libft/
 

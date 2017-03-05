@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 09:44:19 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/05 11:13:47 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/05 13:11:12 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <errno.h>
 
 int				ft_printf(const char *format, ...);
 int				get_next_line(int fd, char **line);

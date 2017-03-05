@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 10:28:30 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/05 10:36:57 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/05 13:13:56 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <signal.h>
+# include "libft.h"
 
 #endif
