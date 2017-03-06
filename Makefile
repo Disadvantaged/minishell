@@ -1,11 +1,13 @@
-NAME = ft_ls
+NAME = minishell
 
 FLAGS = -Wall -Werror -Wextra
 
 FLAGS += -Ilibft/includes -Iincludes/
 
-SRCS = src/main.c \
-	   src/loop.c
+SRC = main.c \
+	  readline.c
+
+SRCS = $(addprefix src/, $(SRC))
 
 LIBFT_PATH = libft/
 

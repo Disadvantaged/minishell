@@ -95,7 +95,10 @@ SRC = ft_atoi.c \
 	   ft_lstlen.c \
 	   ft_lstsort.c \
 	   ft_lstrev.c \
-	   ft_lstaddlast.c
+	   ft_lstaddlast.c \
+	   ft_strtok.c \
+	   ft_strspn.c \
+	   ft_strcspn.c
 SRCS = $(addprefix src/, $(SRC))
 RM = rm -f
 MKDIR = @mkdir -p $(@D)

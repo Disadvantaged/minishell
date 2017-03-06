@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/05 10:28:30 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/06 13:29:25 by dgolear          ###   ########.fr       */
+/*   Created: 2017/03/06 14:41:07 by dgolear           #+#    #+#             */
+/*   Updated: 2017/03/06 14:58:14 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <dirent.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
-# include <signal.h>
-# include "libft.h"
+char	*ft_strtok_r(char *str, const char *delim, char **nextp)
+{
+	char *ret;
 
-char	*readline(void);
-int		minishell_loop(char **env, char **commands);
-
-#endif
+	if (str == NULL)
+	{
+		str = *nextp;
+	}
+	str += ft_strspn(str, delim);
+	if (*str == '\0')
+		return (NULL);
+	ret = str;
+	str += ft_strcspn(str, delim);
+	if (*str)
+		*str++ = '\0';
+	*nextp = str;
+	return (ret);
+}

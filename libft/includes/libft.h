@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 09:44:19 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/05 13:11:12 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/06 14:58:05 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include <string.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include <errno.h>
 
+size_t			ft_strspn(const char *s1, const char *s2);
+size_t			ft_strcspn(const char *s1, const char *s2);
+char			*ft_strtok_r(char *str, const char *delim, char **nextp);
 int				ft_printf(const char *format, ...);
 int				get_next_line(int fd, char **line);
 void			ft_puttab(char **s);

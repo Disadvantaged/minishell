@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/05 10:28:30 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/06 13:29:25 by dgolear          ###   ########.fr       */
+/*   Created: 2017/03/06 13:36:21 by dgolear           #+#    #+#             */
+/*   Updated: 2017/03/06 13:38:40 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <dirent.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
-# include <signal.h>
-# include "libft.h"
+char	**get_args(char	*str)
+{
+	char	**args;
 
-char	*readline(void);
-int		minishell_loop(char **env, char **commands);
-
-#endif
+	if (ft_strrchr(str, ';'));
+}

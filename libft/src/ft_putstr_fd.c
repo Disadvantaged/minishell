@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 10:00:48 by dgolear           #+#    #+#             */
-/*   Updated: 2017/01/07 15:22:24 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/05 13:03:02 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_putstr_fd(char const *s, int fd)
 
 	if (s == NULL)
 	{
-		write(1, "(null)", 6);
+		write(fd, "(null)", 6);
 		return (6);
 	}
 	i = 0;
