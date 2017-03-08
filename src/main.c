@@ -6,39 +6,43 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 11:30:55 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/06 13:34:37 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/09 01:28:55 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	free_args(char **args)
+{
+	char	*temp;
+	int		i;
+
+	i = 0;
+	while (args[i] != NULL)
+	{
+		temp = args[i];
+		i++;
+		ft_strdel(&temp);
+	}
+	free(args);
+}
+
 int		minishell_loop(char **env, char **commands)
 {
-	char		*line;
-//	t_list		*args;
-//	t_list		*temp;
+	char		**args;
 	int			status;
 
 	if (env || commands)
 		;
-//	if (commands != NULL)
-//		execute(commands);
+	if (commands != NULL)
+		execute(commands, env);
 	status = 1;
 	while (status)
 	{
 		ft_printf("$> ");
-		line = readline();
-		args = get_args(line);
-//		while (args != NULL)
-//		{
-//			temp = args;
-//			args = args->next;
-//			status = execute(temp->content);
-//			free(temp);
-//		}
-		if (!ft_strcmp(line, "exit"))
-			exit(0);
-		ft_strdel(&line);
+		args = readline();
+		execute(args, env);
+		free_args(args);
 	}
 	return (status);
 }
