@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 13:35:25 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 15:59:06 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 13:12:52 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static t_builtin	g_fun[] =
 {
 	{"exit", &b_exit},
 	{"echo", &b_echo},
-/*	{"cd", &b_cd},
+	{"cd", &b_cd},
 	{"setenv", &b_setenv},
 	{"unsetenv", &b_unsetenv},
-*/	{"env", &b_env}
+	{"env", &b_env}
 };
 
-static char	*check_paths(char *name, char paths[][50], int max)
+static char	*check_paths(char *name, char paths[][100], int max)
 {
 	char	realpath[200];
 	int		i;
@@ -55,7 +55,7 @@ static char	*get_path(char *name, char **env)
 	char	*temp;
 	char	path_var[1024];
 	char	*realpath;
-	char	paths[100][50];
+	char	paths[100][100];
 	int		i;
 
 	i = 0;
@@ -111,7 +111,7 @@ int			execute(char **args, char **env)
 	int		i;
 
 	i = 0;
-	while (i < 3)
+	while (i < 6)
 	{
 		if (ft_strcmp(args[0], g_fun[i].name) == 0)
 		{

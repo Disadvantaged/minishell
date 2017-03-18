@@ -1,55 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_echo.c                                           :+:      :+:    :+:   */
+/*   b_unsetenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/09 14:21:42 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/18 12:24:44 by dgolear          ###   ########.fr       */
+/*   Created: 2017/03/18 13:11:56 by dgolear           #+#    #+#             */
+/*   Updated: 2017/03/18 13:30:37 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_arg(char *arg)
+void	remove_var(char *arg, char **env)
 {
 	int		i;
+	int		j;
 
 	i = 0;
-	while (arg[i] != '\0')
+	while (env[i])
 	{
-		if (arg[i] != '\'' && arg[i] != '\"')
-			ft_putchar(arg[i]);
+		j = 0;
+		while (env[i][j] == arg[j] && env[i][j] != '=')
+			j++;
+		if (env[i][j] == '=')
+		{
+			j = i;
+			while (env[j + 1])
+			{
+				env[j] = env[j + 1];
+				j++;
+			}
+			env[j] = NULL;
+		}
 		i++;
 	}
 }
 
-int		b_echo(char **args, char **env)
+int		b_unsetenv(char **args, char **env)
 {
-	int		nflag;
-	int		i;
-
-	i = 1;
 	if (args[1] == NULL)
 	{
-		ft_printf("\n");
-		return (0);
+		ft_dprintf(STDERR_FILENO, "unsetenv: Too few arguments.\n");
+		return (-1);
 	}
-	if (ft_strcmp(args[1], "-n") == 0 && (env || !env))
-	{
-		nflag = 1;
-		i++;
-	}
-	else
-		nflag = 0;
-	while (args[i] != NULL)
-	{
-		print_arg(args[i++]);
-		if (args[i] == NULL && !nflag)
-			ft_putchar('\n');
-		else if (args[i] != NULL)
-			ft_putchar(' ');
-	}
+	remove_var(args[1], env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 10:28:30 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 15:14:41 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 12:53:47 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int			b_exit(char **args, char **env);
 int			b_cd(char **args, char **env);
 int			b_echo(char **args, char **env);
 int			b_setenv(char **args, char **env);
+void		print_env(char **env);
 int			b_unsetenv(char **args, char **env);
 int			b_env(char **args, char **env);
 int			b_pwd(char **args, char **env);
