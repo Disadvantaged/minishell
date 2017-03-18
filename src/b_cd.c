@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 11:39:25 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/18 12:20:59 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 13:38:12 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,10 @@ char	*add_path(char *name, char **env)
 
 int		b_cd(char **args, char **env)
 {
-	int		i;
 	char	*s;
 
-	i = 0;
 	if (args[1] == NULL)
-	{
-		s = find_home(env);
-		chdir(s);
-	}
+		chdir(find_home(env));
 	else
 	{
 		if (num_args(args) > 2)

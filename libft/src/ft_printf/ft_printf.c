@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 16:00:34 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/05 11:14:16 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 13:42:59 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		print_len(t_param *params, va_list ap, char letter)
 	*pointer = g_len;
 	return (0);
 }
-
 
 int		ft_printf(const char *format, ...)
 {
@@ -46,7 +45,7 @@ int		ft_dprintf(int fd, const char *format, ...)
 int		ft_vdprintf(int fd, const char *format, va_list ap)
 {
 	int		i;
-	
+
 	i = 0;
 	g_len = 0;
 	g_fd = fd;

@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:22:19 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 15:55:35 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 14:33:33 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_line(void)
 	else if (flag == 0)
 	{
 		ft_printf("\n");
-		exit (0);
+		exit(0);
 	}
 	else
 		return (line);
@@ -62,7 +62,7 @@ char	**split_line(char *line)
 	i = 1;
 	max_size = 10;
 	if ((args = (char **)malloc(sizeof(char *) * 10)) == NULL)
-		exit (-1 + 0 * ft_dprintf(2, "minishell: Memory allocation error\n"));
+		exit(-1 + 0 * ft_dprintf(2, "minishell: Memory allocation error\n"));
 	tmp = line;
 	if ((args[0] = ft_strdup(ft_strtok_r(tmp, " \n\t\b\a", &tmp))) == NULL)
 	{
@@ -85,7 +85,7 @@ char	**readline(void)
 	char	**args;
 
 	line = get_line();
-	if (line[0] == '\0' || line[1] == '\0')
+	if (line[0] == '\0')
 	{
 		ft_strdel(&line);
 		return (NULL);

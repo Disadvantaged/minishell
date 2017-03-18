@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:17:53 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/05 10:52:26 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 13:42:29 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_conv	g_conv[] =
 
 int		g_num = 16;
 
-int	print_percent(t_param *params, va_list ap, char letter)
+int		print_percent(t_param *params, va_list ap, char letter)
 {
 	int		width;
 
@@ -83,7 +83,7 @@ int		check(const char *format, int *pos, va_list ap)
 	return (length);
 }
 
-int	conversion(const char *format, int *pos, t_param *params, va_list ap)
+int		conversion(const char *format, int *pos, t_param *params, va_list ap)
 {
 	int		i;
 	int		printed;

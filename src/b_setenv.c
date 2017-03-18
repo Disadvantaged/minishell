@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 12:51:39 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/18 13:16:26 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 14:04:22 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ void	set_var(char *name, char *value, char **env)
 		i++;
 	ft_strcat(buf, name);
 	ft_strcat(buf, "=");
-	if (value != NULL)
-		ft_strcat(buf, value);
-	else
+	if (value == NULL)
 		ft_strcat(buf, "\0");
+	else if (value[0] == '\"')
+	{
+		ft_strcat(buf, value + 1);
+		buf[ft_strlen(buf) - 1] = '\0';
+	}
+	else
+		ft_strcat(buf, value);
 	if (!env[i])
 		env[i + 1] = NULL;
 	env[i] = ft_strdup(buf);

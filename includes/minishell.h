@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 10:28:30 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/18 12:53:47 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 15:06:15 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,21 @@
 # define IS_PARENT 1
 # define IS_CHILD 0
 
-char		**readline(void);
-void		free_args(char **args);
-int			minishell_loop(char **env, char **commands);
-int			execute(char **args, char **env);
-int			b_exit(char **args, char **env);
-int			b_cd(char **args, char **env);
-int			b_echo(char **args, char **env);
-int			b_setenv(char **args, char **env);
-void		print_env(char **env);
-int			b_unsetenv(char **args, char **env);
-int			b_env(char **args, char **env);
-int			b_pwd(char **args, char **env);
-void		signal_handler(int	flag);
-void		trap(int sig);
+int				launch(char **args, char **env);
+char			**readline(void);
+void			free_args(char **args);
+int				minishell_loop(char **env, char **commands);
+int				execute(char **args, char **env);
+int				b_exit(char **args, char **env);
+int				b_cd(char **args, char **env);
+int				b_echo(char **args, char **env);
+int				b_setenv(char **args, char **env);
+void			print_env(char **env);
+int				b_unsetenv(char **args, char **env);
+int				b_env(char **args, char **env);
+int				b_pwd(char **args, char **env);
+void			signal_handler(int	flag);
+void			trap(int sig);
 
 typedef struct	s_builtin
 {

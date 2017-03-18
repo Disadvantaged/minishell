@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 11:30:55 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 15:56:56 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/18 15:08:08 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	trap(int sig)
 	if (sig == SIGINT)
 		exit(SIGINT);
 	if (sig == SIGQUIT)
-		exit (SIGQUIT);
+		exit(SIGQUIT);
 }
 
-void	signal_handler(int	flag)
+void	signal_handler(int flag)
 {
 	if (flag == IS_PARENT)
 	{
