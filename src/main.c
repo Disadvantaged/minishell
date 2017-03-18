@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 11:30:55 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 01:28:55 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/09 15:56:56 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,30 @@ void	free_args(char **args)
 	free(args);
 }
 
+void	trap(int sig)
+{
+	if (sig == SIGINT)
+		exit(SIGINT);
+	if (sig == SIGQUIT)
+		exit (SIGQUIT);
+}
+
+void	signal_handler(int	flag)
+{
+	if (flag == IS_PARENT)
+	{
+		signal(SIGTSTP, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, &trap);
+	}
+	else if (flag == IS_CHILD)
+	{
+		signal(SIGTSTP, SIG_DFL);
+		signal(SIGINT, &trap);
+		signal(SIGQUIT, SIG_DFL);
+	}
+}
+
 int		minishell_loop(char **env, char **commands)
 {
 	char		**args;
@@ -39,8 +63,10 @@ int		minishell_loop(char **env, char **commands)
 	status = 1;
 	while (status)
 	{
+		signal_handler(IS_PARENT);
 		ft_printf("$> ");
-		args = readline();
+		if ((args = readline()) == NULL)
+			continue;
 		execute(args, env);
 		free_args(args);
 	}

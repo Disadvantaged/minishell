@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   b_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/15 08:29:16 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 13:32:32 by dgolear          ###   ########.fr       */
+/*   Created: 2017/03/09 14:21:42 by dgolear           #+#    #+#             */
+/*   Updated: 2017/03/09 14:40:15 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strcat(char *dst, const char *src)
+int		b_echo(char **args, char **env)
 {
+	int		nflag;
 	int		i;
-	int		n;
 
-	if (dst == NULL || src == NULL)
-		return (NULL);
-	n = 0;
-	i = ft_strlen(dst);
-	while (src[n])
+	i = 1;
+	if (args[1] == NULL)
 	{
-		dst[i + n] = src[n];
-		n++;
+		ft_printf("\n");
+		exit(0);
 	}
-	dst[i + n] = '\0';
-	return (dst);
+	if (ft_strcmp(args[1], "-n") == 0 && (env || !env))
+	{
+		nflag = 1;
+		i++;
+	}
+	else
+		nflag = 0;
+	while (args[i] != NULL)
+	{
+		ft_putstr(args[i++]);
+		if (args[i] == NULL && !nflag)
+			ft_putchar('\n');
+		else if (args[i] != NULL)
+			ft_putchar(' ');
+	}
+	return (0);
 }

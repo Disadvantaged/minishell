@@ -6,23 +6,22 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 13:35:25 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 01:48:38 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/09 15:59:06 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
+
 static t_builtin	g_fun[] =
 {
 	{"exit", &b_exit},
 	{"echo", &b_echo},
-	{"cd", &b_cd},
+/*	{"cd", &b_cd},
 	{"setenv", &b_setenv},
 	{"unsetenv", &b_unsetenv},
-	{"env", &b_env},
-	{"pwd", &b_pwd}
+*/	{"env", &b_env}
 };
-*/
+
 static char	*check_paths(char *name, char paths[][50], int max)
 {
 	char	realpath[200];
@@ -39,7 +38,7 @@ static char	*check_paths(char *name, char paths[][50], int max)
 		{
 			if (access(realpath, X_OK) == -1)
 			{
-				ft_printf("minishell: cannot access bin\
+				ft_dprintf(2, "minishell: cannot access bin\
 ary with address:%s\n", realpath);
 				i++;
 				continue;
@@ -48,8 +47,7 @@ ary with address:%s\n", realpath);
 		}
 		i++;
 	}
-	ft_printf("minishell: command not found: %s\n", name);
-	exit(-1);
+	return (NULL);
 }
 
 static char	*get_path(char *name, char **env)
@@ -72,7 +70,11 @@ static char	*get_path(char *name, char **env)
 	i = 1;
 	while ((realpath = strtok_r(NULL, ":", &temp)) != NULL)
 		ft_strcpy(paths[i++], realpath);
-	realpath = check_paths(name, paths, i);
+	if ((realpath = check_paths(name, paths, i)) == NULL)
+	{
+		ft_dprintf(2, "minishell: command not found: %s\n", name);
+		exit(-1);
+	}
 	return (realpath);
 }
 
@@ -89,13 +91,12 @@ static int	launch(char **args, char **env)
 	if (pid == 0)
 	{
 		path = get_path(args[0], env);
-		signal(SIGINT, child_trap);
+		signal_handler(IS_CHILD);
 		if (execve(path, args, env) == -1)
 			exit(ft_dprintf(2, "minishell: Command execution error\n"));
 	}
 	else
 	{
-		signal(SIGINT, parent_trap);
 		if ((w = waitpid(pid, &stat, WUNTRACED)) == -1)
 			exit(-1 + 0 * ft_dprintf(2, "minishell: Error with wait\n"));
 		if (WIFEXITED(stat))
@@ -107,19 +108,18 @@ static int	launch(char **args, char **env)
 int			execute(char **args, char **env)
 {
 	int		ret;
-/*	int		i;
+	int		i;
 
 	i = 0;
-	while (i < 6)
+	while (i < 3)
 	{
-		if (ft_strcmp(args[0], g_fun->name) == 0)
+		if (ft_strcmp(args[0], g_fun[i].name) == 0)
 		{
-			ret = g_fun->fun(args, env);
+			ret = g_fun[i].fun(args, env);
 			return (ret);
 		}
 		i++;
 	}
-*/	
 	ret = launch(args, env);
 	return (ret);
 }

@@ -6,7 +6,10 @@ FLAGS += -Ilibft/includes -Iincludes/
 
 SRC = main.c \
 	  readline.c \
-	  execute.c
+	  execute.c \
+	  b_env.c \
+	  b_exit.c \
+	  b_echo.c
 
 SRCS = $(addprefix src/, $(SRC))
 

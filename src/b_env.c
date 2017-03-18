@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   b_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/15 08:29:16 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 13:32:32 by dgolear          ###   ########.fr       */
+/*   Created: 2017/03/09 12:40:58 by dgolear           #+#    #+#             */
+/*   Updated: 2017/03/09 15:46:56 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strcat(char *dst, const char *src)
+void	print_env(char **env)
 {
 	int		i;
-	int		n;
 
-	if (dst == NULL || src == NULL)
-		return (NULL);
-	n = 0;
-	i = ft_strlen(dst);
-	while (src[n])
-	{
-		dst[i + n] = src[n];
-		n++;
-	}
-	dst[i + n] = '\0';
-	return (dst);
+	i = 0;
+	while (env[i] != NULL)
+		ft_printf("%s\n", env[i++]);
+}
+
+int		b_env(char **args, char **env)
+{
+	if (args[1] == NULL)
+		print_env(env);
+	return (0);
 }

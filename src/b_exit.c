@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   b_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/15 08:29:16 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/09 13:32:32 by dgolear          ###   ########.fr       */
+/*   Created: 2017/03/09 13:19:19 by dgolear           #+#    #+#             */
+/*   Updated: 2017/03/09 14:39:35 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strcat(char *dst, const char *src)
+int		b_exit(char **args, char **env)
 {
-	int		i;
-	int		n;
+	int		exitstatus;
 
-	if (dst == NULL || src == NULL)
-		return (NULL);
-	n = 0;
-	i = ft_strlen(dst);
-	while (src[n])
-	{
-		dst[i + n] = src[n];
-		n++;
-	}
-	dst[i + n] = '\0';
-	return (dst);
+	if (env)
+		;
+	if (args[1] != NULL)
+		exitstatus = ft_atoi(args[1]);
+	else
+		exitstatus = 0;
+	free_args(args);
+	exit(exitstatus);
 }
