@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 13:19:19 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/18 14:29:35 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/19 12:13:55 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int		b_exit(char **args, char **env)
 	else
 		exitstatus = 0;
 	free_args(args);
+	ft_printf("exit\n");
 	exit(exitstatus);
 }

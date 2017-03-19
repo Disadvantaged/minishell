@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 14:07:01 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/18 15:02:54 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/19 12:10:15 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,13 @@ ary with address:%s\n", realpath);
 
 void		add_pathvar(char **env, char path_var[1024])
 {
-	int		i;
+	char	*value;
 
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strstr(env[i], "PATH") != NULL && env[i][0] == 'P')
-			break ;
-		i++;
-	}
-	if (!env[i])
-	{
-		ft_dprintf(STDERR_FILENO, "minishell: PATH variable does not exist\n");
-		exit(-1);
-	}
-	ft_strcpy(path_var, ft_strchr(env[i], '=') + 1);
+	value = NULL;
+	value = ft_getenv("PATH", env);
+	if (value == NULL)
+		value = ft_getenv("PATH", g_env);
+	ft_strcpy(path_var, value);
 	if (path_var[0] == '\0')
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: PATH variable is empty\n");

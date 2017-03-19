@@ -6,11 +6,13 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 11:30:55 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/18 15:08:08 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/19 12:00:00 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**g_env;
 
 void	free_args(char **args)
 {
@@ -75,6 +77,7 @@ int		minishell_loop(char **env, char **commands)
 
 int		main(int ac, char **av, char **env)
 {
+	g_env = env;
 	minishell_loop(env, ac > 1 ? av + 1 : NULL);
 	return (0);
 }
