@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 13:26:52 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/19 13:32:10 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/19 13:35:27 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		find_var(char *buf, char **env)
 			if (buf[j] == env[i][j])
 				j++;
 			else
-				break;
+				break ;
 		}
 		if (env[i][j] == '=')
 			return (i);
@@ -84,7 +84,7 @@ char	*ft_getenv(char *name, char **env)
 			if (varname[j] == env[i][j])
 				j++;
 			else
-				break;
+				break ;
 		}
 		if (env[i][j] == '=')
 			return (&env[i][j + 1]);

@@ -6,13 +6,11 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 12:40:58 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/19 13:29:14 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/19 13:35:35 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 int		b_env(char **args, char **env)
 {
