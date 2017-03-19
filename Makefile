@@ -13,7 +13,8 @@ SRC = main.c \
 	  b_cd.c \
 	  b_setenv.c \
 	  b_unsetenv.c \
-	  launch.c
+	  launch.c \
+	  env_utils.c
 
 SRCS = $(addprefix src/, $(SRC))
 
