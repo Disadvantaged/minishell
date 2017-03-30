@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 14:07:01 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/19 12:10:15 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/30 17:57:57 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void		add_pathvar(char **env, char path_var[1024])
 	value = NULL;
 	value = ft_getenv("PATH", env);
 	if (value == NULL)
-		value = ft_getenv("PATH", g_env);
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: PATH variable does not exist\n");
+		exit(-1);
+	}
 	ft_strcpy(path_var, value);
 	if (path_var[0] == '\0')
 	{
@@ -64,17 +67,23 @@ static char	*get_path(char *name, char **env)
 	char	paths[100][100];
 	int		i;
 
-	i = 0;
-	add_pathvar(env, path_var);
-	ft_strcpy(paths[0], strtok_r(path_var, ":", &temp));
-	i = 1;
-	while ((realpath = strtok_r(NULL, ":", &temp)) != NULL)
-		ft_strcpy(paths[i++], realpath);
-	if ((realpath = check_paths(name, paths, i)) == NULL)
+	if (name[0] != '/' && name[0] != '.')
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: command not found: %s\n", name);
-		return (NULL);
+		i = 0;
+		add_pathvar(env, path_var);
+		ft_strcpy(paths[0], strtok_r(path_var, ":", &temp));
+		i = 1;
+		while ((realpath = strtok_r(NULL, ":", &temp)) != NULL)
+			ft_strcpy(paths[i++], realpath);
+		if ((realpath = check_paths(name, paths, i)) == NULL)
+		{
+			ft_dprintf(STDERR_FILENO,
+				"minishell: command not found: %s\n", name);
+			return (NULL);
+		}
 	}
+	else
+		return (name);
 	return (realpath);
 }
 
