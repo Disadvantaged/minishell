@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 10:28:30 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/31 12:43:31 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 13:46:31 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void			set_var(char *name, char *value, char **env);
 void			print_env(char **env);
 int				num_args(char **args);
 char			*ft_getenv(char *name, char **env);
-char			**copy_env(char **env);
 int				find_var(char *buf, char **env);
 
 typedef struct	s_builtin

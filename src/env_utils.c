@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 13:26:52 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/31 13:43:16 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 13:46:13 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@ void	print_env(char **env)
 	i = 0;
 	while (env[i] != NULL)
 		ft_printf("%s\n", env[i++]);
-}
-
-char	**copy_env(char **env)
-{
-	char	**envc;
-	int		i;
-
-	envc = (char **)malloc((num_args(env) + 10) * sizeof(char *));
-	i = 0;
-	while (env[i])
-	{
-		envc[i] = ft_strdup(env[i]);
-		i++;
-	}
-	return (envc);
 }
 
 int		find_var(char *buf, char **env)
@@ -86,22 +71,19 @@ char	*ft_getenv(char *name, char **env)
 {
 	int		i;
 	int		j;
-	char	varname[257];
 
-	ft_strclr(varname);
-	ft_strcpy(varname, name);
 	i = 0;
 	while (env[i])
 	{
-		j = 0;
-		while (env[i][j] != '=')
+		j = 0;	
+		while (name[j] && env[i][j] != '=')
 		{
-			if (varname[j] == env[i][j])
+			if (name[j] == env[i][j])
 				j++;
 			else
 				break ;
 		}
-		if (env[i][j] == '=')
+		if (env[i][j] == '=' && name[j] == '\0')
 			return (&env[i][j + 1]);
 		i++;
 	}
