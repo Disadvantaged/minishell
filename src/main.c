@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 11:30:55 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/30 15:33:48 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 13:09:42 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_args(char **args)
 		ft_strdel(&temp);
 	}
 	free(args);
+	args = NULL;
 }
 
 void	trap(int sig)

@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 13:26:52 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/19 13:35:27 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 13:43:16 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ void	print_env(char **env)
 		ft_printf("%s\n", env[i++]);
 }
 
+char	**copy_env(char **env)
+{
+	char	**envc;
+	int		i;
+
+	envc = (char **)malloc((num_args(env) + 10) * sizeof(char *));
+	i = 0;
+	while (env[i])
+	{
+		envc[i] = ft_strdup(env[i]);
+		i++;
+	}
+	return (envc);
+}
+
 int		find_var(char *buf, char **env)
 {
 	int		j;
@@ -29,15 +44,15 @@ int		find_var(char *buf, char **env)
 	i = 0;
 	while (env[i])
 	{
-		j = 0;
-		while (env[i][j] != '=')
+		j = 0;	
+		while (buf[j] && env[i][j] != '=')
 		{
 			if (buf[j] == env[i][j])
 				j++;
 			else
 				break ;
 		}
-		if (env[i][j] == '=')
+		if (env[i][j] == '=' && buf[j] == '\0')
 			return (i);
 		i++;
 	}
@@ -50,9 +65,9 @@ void	set_var(char *name, char *value, char **env)
 	char	buf[4096];
 
 	ft_strclr(buf);
-	ft_strcat(buf, name);
-	ft_strcat(buf, "=");
+	ft_strcpy(buf, name);
 	i = find_var(buf, env);
+	ft_strcat(buf, "=");
 	if (value == NULL)
 		ft_strcat(buf, "\0");
 	else if (value[0] == '\"')
