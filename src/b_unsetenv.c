@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 13:11:56 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/31 11:19:59 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 12:05:44 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	remove_var(char *arg, char **env)
 			j++;
 		if (env[i][j] == '=')
 		{
+			ft_strdel(&env[i]);
 			j = i;
 			while (env[j + 1])
 			{

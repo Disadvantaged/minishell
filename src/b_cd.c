@@ -6,27 +6,13 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 11:39:25 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/18 13:38:12 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 12:09:07 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*find_home(char **env)
-{
-	int		i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strstr(env[i], "HOME") != NULL)
-			return (ft_strchr(env[i], '=') + 1);
-		i++;
-	}
-	return (NULL);
-}
-
-int		num_args(char **args)
+int			num_args(char **args)
 {
 	int		i;
 
@@ -36,7 +22,7 @@ int		num_args(char **args)
 	return (i);
 }
 
-char	*add_path(char *name, char **env)
+char		*add_path(char *name, char **env)
 {
 	char	path[4096];
 	char	buf[4096];
@@ -50,36 +36,49 @@ char	*add_path(char *name, char **env)
 		return (ft_strdup(name));
 	else if (name[0] == '~')
 	{
-		ft_strcpy(buf, find_home(env));
-		ft_strcat(buf, "/");
-		ft_strcat(buf, name + 2);
+		ft_strcpy(buf, ft_getenv("HOME", env));
+		ft_strcat(buf, name + 1);
+	}
+	else if (name[0] == '-')
+	{
+		ft_strcpy(buf, ft_getenv("OLDPWD", env));
+		ft_printf("%s\n", ft_getenv("OLDPWD", env));
 	}
 	else
 		ft_strcat(buf, name);
 	return (ft_strdup(buf));
 }
 
-int		b_cd(char **args, char **env)
+static char	*check_path(char *s)
+{
+	if (access(s, F_OK) == -1)
+		return ("File doesn't exist");
+	else if (access(s, X_OK) == -1)
+		return ("permission denied");
+	else
+		return ("Error accessing directory");
+}
+
+int			b_cd(char **args, char **env)
 {
 	char	*s;
 
-	if (args[1] == NULL)
-		chdir(find_home(env));
-	else
+	if (num_args(args) > 2)
 	{
-		if (num_args(args) > 2)
-		{
-			ft_dprintf(STDERR_FILENO, "cd: Too many arguments.\n");
-			return (-1);
-		}
-		s = add_path(args[1], env);
-		if (chdir(s) == -1)
-		{
-			ft_dprintf(STDERR_FILENO, "cd: given path is not a \
-directory or does not exist: %s\n", args[1]);
-			return (-1);
-		}
-		ft_strdel(&s);
+		ft_dprintf(STDERR_FILENO, "cd: Too many arguments.\n");
+		return (-1);
 	}
+	if (args[1] == NULL)
+		s = ft_strdup(ft_getenv("HOME", env));
+	else
+		s = add_path(args[1], env);
+	if (chdir(s) == -1)
+	{
+		ft_dprintf(STDERR_FILENO, "cd: %s: %s\n", check_path(s), args[1]);
+		return (-1);
+	}
+	set_var("OLDPWD", ft_getenv("PWD", env), env);
+	set_var("PWD", getcwd(NULL, 255), env);
+	ft_strdel(&s);
 	return (0);
 }
