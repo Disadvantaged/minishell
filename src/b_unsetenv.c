@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 13:11:56 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/19 13:39:27 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 11:19:59 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,15 @@ void	remove_var(char *arg, char **env)
 
 int		b_unsetenv(char **args, char **env)
 {
+	int		i;
+
+	i = 1;
 	if (args[1] == NULL)
 	{
 		ft_dprintf(STDERR_FILENO, "unsetenv: Too few arguments.\n");
 		return (-1);
 	}
-	remove_var(args[1], env);
+	while (args[i])
+		remove_var(args[i++], env);
 	return (0);
 }

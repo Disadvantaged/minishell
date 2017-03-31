@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 14:07:01 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/30 17:57:57 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 11:14:44 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ static char	*get_path(char *name, char **env)
 	{
 		i = 0;
 		add_pathvar(env, path_var);
-		ft_strcpy(paths[0], strtok_r(path_var, ":", &temp));
+		ft_strcpy(paths[0], ft_strtok_r(path_var, ":", &temp));
 		i = 1;
-		while ((realpath = strtok_r(NULL, ":", &temp)) != NULL)
+		while ((realpath = ft_strtok_r(NULL, ":", &temp)) != NULL)
 			ft_strcpy(paths[i++], realpath);
 		if ((realpath = check_paths(name, paths, i)) == NULL)
 		{
