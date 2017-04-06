@@ -1,46 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 13:35:25 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/31 13:53:33 by dgolear          ###   ########.fr       */
+/*   Created: 2017/04/06 18:20:20 by dgolear           #+#    #+#             */
+/*   Updated: 2017/04/06 18:32:29 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		g_ret;
-
-static t_builtin	g_fun[] =
+void	trap_parent(int sig)
 {
-	{"exit", &b_exit},
-	{"echo", &b_echo},
-	{"cd", &b_cd},
-	{"chdir", b_cd},
-	{"setenv", &b_setenv},
-	{"unsetenv", &b_unsetenv},
-	{"env", &b_env}
-};
+	if (sig == SIGINT)
+		ft_putstr("\n$> ");
+}
 
-int			execute(char **args, char **env)
+void	trap(int sig)
 {
-	int		ret;
-	int		i;
+	if (sig == SIGINT)
+		exit(SIGINT);
+	if (sig == SIGQUIT)
+		exit(SIGQUIT);
+}
 
-	i = 0;
-	while (i < 7)
+void	signal_handler(int flag)
+{
+	if (flag == IS_PARENT)
 	{
-		if (ft_strcmp(args[0], g_fun[i].name) == 0)
-		{
-			ret = g_fun[i].fun(args, env);
-			return (ret);
-		}
-		i++;
+		signal(SIGTSTP, SIG_IGN);
+		signal(SIGINT, &trap_parent);
+		signal(SIGQUIT, &trap);
 	}
-	ret = launch(args, env);
-	g_ret = ret;
-	return (ret);
+	else if (flag == IS_CHILD)
+	{
+		signal(SIGTSTP, SIG_DFL);
+		signal(SIGINT, &trap);
+		signal(SIGQUIT, SIG_DFL);
+	}
 }

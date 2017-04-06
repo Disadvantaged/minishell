@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 11:39:25 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/31 12:43:22 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 14:02:38 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,16 @@ char		*add_path(char *name, char **env)
 
 static char	*check_path(char *s)
 {
+	struct stat	statbuf;
+
 	if (access(s, F_OK) == -1)
 		return ("File doesn't exist");
-	else if (access(s, X_OK) == -1)
+	stat(s, &statbuf);
+	if (!S_ISDIR(statbuf.st_mode))
+		return ("File is not a directory");
+	if (access(s, X_OK) == -1)
 		return ("permission denied");
-	else
-		return ("Error accessing directory");
+	return ("Error accessing directory");
 }
 
 int			b_cd(char **args, char **env)

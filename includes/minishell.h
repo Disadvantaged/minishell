@@ -6,7 +6,7 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 10:28:30 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/31 13:46:31 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/04/06 18:23:00 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int				b_env(char **args, char **env);
 int				b_pwd(char **args, char **env);
 void			signal_handler(int	flag);
 void			trap(int sig);
+void			trap_parent(int sig);
 void			set_var(char *name, char *value, char **env);
 void			print_env(char **env);
 int				num_args(char **args);
@@ -48,6 +49,6 @@ typedef struct	s_builtin
 	int		(*fun)(char **, char **);
 }				t_builtin;
 
-extern char		**g_env;
+extern int		g_ret;
 
 #endif

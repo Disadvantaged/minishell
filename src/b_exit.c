@@ -6,11 +6,13 @@
 /*   By: dgolear <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 13:19:19 by dgolear           #+#    #+#             */
-/*   Updated: 2017/03/19 12:13:55 by dgolear          ###   ########.fr       */
+/*   Updated: 2017/03/31 14:05:47 by dgolear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		g_ret;
 
 int		check_arg(char *arg)
 {
@@ -37,7 +39,7 @@ int		b_exit(char **args, char **env)
 		if (check_arg(args[1]) == -1)
 		{
 			ft_dprintf(STDERR_FILENO, "exit: numeric argument required\n");
-			return (-1);
+			exit(-1);
 		}
 		if (args[2] != NULL)
 		{
@@ -47,7 +49,7 @@ int		b_exit(char **args, char **env)
 		exitstatus = ft_atoi(args[1]);
 	}
 	else
-		exitstatus = 0;
+		exitstatus = g_ret;
 	free_args(args);
 	ft_printf("exit\n");
 	exit(exitstatus);
